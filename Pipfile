@@ -1,0 +1,23 @@
+[[source]]
+name = "pypi"
+url = "https://pypi.org/simple"
+verify_ssl = true
+
+[dev-packages]
+
+[packages]
+django = "*"
+djangorestframework = "*"
+psycopg2-binary = "*"
+dj-database-url = "*"
+
+[requires]
+python_version = "3.7"
+
+[scripts]
+migrate = "python manage.py migrate"
+makemigrations = "python manage.py makemigrations"
+server = "python manage.py runserver"
+createsuperuser = "python manage.py createsuperuser"
+shell = "python manage.py shell"
+collectstatic = "python manage.py collectstatic --no-input"

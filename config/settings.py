@@ -32,7 +32,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    # dajngo apps
+    # django apps
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -48,6 +48,7 @@ INSTALLED_APPS = [
     'apps.building',
     'apps.product',
     'apps.factory',
+    'apps.shared',
 ]
 
 MIDDLEWARE = [
@@ -85,11 +86,21 @@ WSGI_APPLICATION = 'config.wsgi.application'
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
 
 
+# DATABASES = {
+#     'default': dj_database_url.config(default='postgres://localhost/bitfury
+# }
+# DATABASES['default']['ENGINE'] = 'django.db.backends.postgresql_psycopg2'
+# TODO
 DATABASES = {
-    'default': dj_database_url.config(default='postgres://localhost/network'),
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'bitfury',
+        'USER': 'bitfury',
+        'PASSWORD': 'pass',
+        'HOST': 'localhost',
+        'PORT': '5432',
+    }
 }
-DATABASES['default']['ENGINE'] = 'django.db.backends.postgresql_psycopg2'
-
 
 # Password validation
 # https://docs.djangoproject.com/en/2.2/ref/settings/#auth-password-validators
@@ -128,5 +139,5 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
 PROJECT_DIR = os.path.dirname(os.path.abspath(__file__))
-STATIC_ROOT = os.path.join(PROJECT_DIR, 'static')
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 STATIC_URL = '/static/'

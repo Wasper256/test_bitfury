@@ -3,10 +3,14 @@ from rest_framework import viewsets
 from rest_framework.decorators import action
 from rest_framework.response import Response
 
-from .models import Building, BuildingOwners
-from .serializers import BuildingRetrieveSerializer, BuildingBaseSerializer, \
-    CreateUpdateShareSerializer, DeleteShareSerializer
 from apps.shared.utils import custom_retrieve
+from apps.shared.serializers import DeleteShareSerializer
+from .models import Building, BuildingOwners
+from .serializers import (
+    BuildingRetrieveSerializer, BuildingBaseSerializer,
+    CreateUpdateShareSerializer
+)
+
 
 class BuildingViewSet(viewsets.ModelViewSet):
     queryset = Building.objects.filter()
@@ -20,7 +24,6 @@ class BuildingViewSet(viewsets.ModelViewSet):
         response = super().retrieve(request, *args, **kwargs)
         custom_retrieve(kwargs, request, response)
         return response
-
 
     @action(detail=False, name='update', methods=['post', 'put'])
     def update_share(self, request, *args, **kwargs):
@@ -55,12 +58,3 @@ class BuildingViewSet(viewsets.ModelViewSet):
         elif not deleted[0]:
             return Response({"error": "No such share found"},
                             status=status.HTTP_404_NOT_FOUND)
-
-
-# class BuildingOwnersViewSet(viewsets.ModelViewSet):
-#     queryset = BuildingOwners.objects.all()
-#
-#     def get_serializer_class(self):
-#         if self.action in ['create', 'update']:
-#             return CreateUpdateShareSerializer
-#         return BaseShareSerializer

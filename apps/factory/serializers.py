@@ -1,37 +1,37 @@
 from rest_framework import serializers
 
 from apps.shared.utils import share_custom_validator
-from .models import Building, BuildingOwners
+from .models import Factory, FactoryOwners
 
 
-class BuildingShareholdersRetrieveSerializer(serializers.ModelSerializer):
+class FactoryShareholdersRetrieveSerializer(serializers.ModelSerializer):
     username = serializers.CharField(read_only=True,
                                      source="shareholder.username")
     first_name = serializers.CharField(read_only=True,
                                        source="shareholder.first_name")
 
     class Meta:
-        model = BuildingOwners
+        model = FactoryOwners
         fields = ('shareholder', 'username', 'first_name', 'share')
 
 
-class BuildingBaseSerializer(serializers.ModelSerializer):
+class FactoryBaseSerializer(serializers.ModelSerializer):
 
     class Meta:
-        model = Building
-        fields = ('id', 'name', 'address', 'area',)
+        model = Factory
+        fields = ('id', 'name', 'location')
 
 
-class BuildingRetrieveSerializer(serializers.ModelSerializer):
+class FactoryRetrieveSerializer(serializers.ModelSerializer):
     shareholders = serializers.SerializerMethodField()
 
     class Meta:
-        model = Building
-        fields = ('id', 'name', 'address', 'area', 'shareholders',)
+        model = Factory
+        fields = ('id', 'name', 'location', 'shareholders',)
         read_only_fields = ('shareholders', )
 
     def get_shareholders(self, obj):
-        return BuildingShareholdersRetrieveSerializer(
+        return FactoryShareholdersRetrieveSerializer(
             obj.owners.model.objects.filter(
                 object=self.instance).select_related('shareholder'),
             many=True, context=self.context).data
@@ -39,10 +39,10 @@ class BuildingRetrieveSerializer(serializers.ModelSerializer):
 
 class CreateUpdateShareSerializer(serializers.ModelSerializer):
     class Meta:
-        model = BuildingOwners
+        model = FactoryOwners
         fields = ('shareholder', 'share', 'object')
 
     def validate_share(self, attrs):
         attrs = super().validate(attrs)
-        share_custom_validator(self, attrs, BuildingOwners)
+        share_custom_validator(self, attrs, FactoryOwners)
         return attrs

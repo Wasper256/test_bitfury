@@ -27,7 +27,7 @@ class FactoryRetrieveSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Factory
-        fields = ('id', 'name', 'location', 'shareholders',)
+        fields = ('id', 'name', 'location', 'shareholders')
         read_only_fields = ('shareholders', )
 
     def get_shareholders(self, obj):

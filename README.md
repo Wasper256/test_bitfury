@@ -31,7 +31,7 @@ DATABASE_URL=postgres://postgres:@localhost/db
 
 ## Additional notes
 
-#####There are two ways to do shareholders logic
+##### There are two ways to do shareholders logic
 
 1) Abstract model for general share and each type of shareholder object has its
  own model with changed "object" field. (This is the way i've done this task)  

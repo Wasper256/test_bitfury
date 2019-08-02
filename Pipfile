@@ -4,13 +4,13 @@ url = "https://pypi.org/simple"
 verify_ssl = true
 
 [dev-packages]
+ipython = "*"
 
 [packages]
 django = "*"
 djangorestframework = "*"
 psycopg2-binary = "*"
 dj-database-url = "*"
-ipython = "*"
 
 [requires]
 python_version = "3.7"

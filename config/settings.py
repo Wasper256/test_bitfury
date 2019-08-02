@@ -86,21 +86,11 @@ WSGI_APPLICATION = 'config.wsgi.application'
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
 
 
-# DATABASES = {
-#     'default': dj_database_url.config(default='postgres://localhost/bitfury
-# }
-# DATABASES['default']['ENGINE'] = 'django.db.backends.postgresql_psycopg2'
-# TODO
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'bitfury',
-        'USER': 'bitfury',
-        'PASSWORD': 'pass',
-        'HOST': 'localhost',
-        'PORT': '5432',
-    }
+    'default': dj_database_url.config(default='postgres://localhost/bitfury')
 }
+DATABASES['default']['ENGINE'] = 'django.db.backends.postgresql_psycopg2'
+
 
 # Password validation
 # https://docs.djangoproject.com/en/2.2/ref/settings/#auth-password-validators

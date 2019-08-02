@@ -13,6 +13,11 @@ from .serializers import (
 
 
 class FactoryViewSet(viewsets.ModelViewSet):
+    """
+    ViewSet to handle all Factory CRUD actions.
+    Shareholders is accessible via Retrieve action.
+    Also here is 2 custom actions for creating, updating, deleting shares.
+    """
     queryset = Factory.objects.filter()
 
     def get_serializer_class(self):
@@ -27,6 +32,9 @@ class FactoryViewSet(viewsets.ModelViewSet):
 
     @action(detail=False, name='update', methods=['post', 'put'])
     def update_share(self, request, *args, **kwargs):
+        """
+        Custom action to handle shares create and update actions
+        """
         serializer = CreateUpdateShareSerializer(data=request.data)
         valid = serializer.is_valid()
         if valid:
@@ -47,6 +55,9 @@ class FactoryViewSet(viewsets.ModelViewSet):
 
     @action(detail=False, name='delete', methods=['delete'])
     def delete_share(self, request, *args, **kwargs):
+        """
+        Custom action to handle shares delete action
+        """
         serializer = DeleteShareSerializer(data=request.data)
         serializer.is_valid(raise_exception=True)
         deleted = FactoryOwners.objects.filter(

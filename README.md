@@ -1,1 +1,48 @@
 # test_bitfury
+
+## Quick Start:
+
+0) Create `.env` file with you enviriment variables, example:
+```
+DATABASE_URL=postgres://postgres:@localhost/db
+```
+
+1) Install Pipenv
+```
+    pip install pipenv
+```
+
+2) Activate Pipenv
+```
+    pipenv shell
+```
+
+3) Install dependencies
+```
+    pipenv install
+```
+
+4) Django start
+```
+    pipenv run migrate
+    pipenv run collectstatic
+    pipenv run runserver
+```
+
+## Additional notes
+There are two ways to do shareholders logic
+0) Abstract model for general share and each type of shareholder object has its
+ own model with changed "object" field. (This is the way i've done this task)  
+ 
+ pros: all pretty simple and optimized queries  
+ 
+ cons: more models and not fully DRY code + if we need to get all shares for 
+ some users - then we will need to do some extra queries or extra model.
+ 
+1) Single table for all shares  together using Generic foreign key. 
+ 
+pros: reduced amount of models(1 instead of 4), easy to get different types of 
+share together 
+  
+cons: not so good queries, harder to work with single type of share, more
+ complicated code

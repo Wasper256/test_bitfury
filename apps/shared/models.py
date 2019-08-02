@@ -9,8 +9,8 @@ class OwnershipAbstract(models.Model):
     # if it is single holder and empty then share == 100%
     share = models.DecimalField(blank=True, null=True, decimal_places=2,
                                 max_digits=2)
-    object = models.IntegerField()
+    shared_object = models.IntegerField()
 
     class Meta:
         abstract = True
-        unique_together = ['shareholder', 'object']
+        unique_together = ['shareholder', 'shared_object']

@@ -13,5 +13,5 @@ class Product(models.Model):
 
 
 class ProductOwners(OwnershipAbstract):
-    object = models.ForeignKey(Product, on_delete=models.CASCADE,
-                               related_name='owners')
+    shared_object = models.ForeignKey(Product, on_delete=models.CASCADE,
+                                      related_name='owners')

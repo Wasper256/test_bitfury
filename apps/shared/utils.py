@@ -1,11 +1,11 @@
 
-from rest_framework.exceptions import ValidationError
 from django.db.models import Sum
+from rest_framework.exceptions import ValidationError
 
 
 def share_custom_validator(self, attrs, Model):
     qs = Model.objects.filter(
-        object=self.initial_data.get('object')).exclude(
+        shared_object=self.initial_data.get('shared_object')).exclude(
         shareholder=self.initial_data.get(
             'shareholder')).aggregate(Sum('share'))
     if not qs['share__sum']:
@@ -15,9 +15,10 @@ def share_custom_validator(self, attrs, Model):
 
 
 def calculate_relative_share(object_id, Model):
-    shares = Model.objects.filter(object=object_id).values_list(
+    shares = Model.objects.filter(shared_object=object_id).values_list(
         'share', flat=True)
-    share = (1 - sum([x for x in shares if x]))/len([x for x in shares if x is None])
+    share = (1 - sum([x for x in shares if x]))/len(
+        [x for x in shares if x is None])
     return share
 
 

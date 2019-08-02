@@ -26,7 +26,7 @@ DATABASE_URL=postgres://postgres:@localhost/db
 ```
     pipenv run migrate
     pipenv run collectstatic
-    pipenv run runserver
+    pipenv run server
 ```
 
 ## Additional notes

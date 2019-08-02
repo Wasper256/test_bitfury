@@ -10,5 +10,5 @@ class Factory(models.Model):
 
 
 class FactoryOwners(OwnershipAbstract):
-    object = models.ForeignKey(Factory, on_delete=models.CASCADE,
-                               related_name='owners')
+    shared_object = models.ForeignKey(Factory, on_delete=models.CASCADE,
+                                      related_name='owners')

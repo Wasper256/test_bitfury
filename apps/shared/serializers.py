@@ -21,4 +21,4 @@ class BaseShareholdersRetrieveSerializer(serializers.Serializer):
 
 class DeleteShareSerializer(serializers.Serializer):
     shareholder = serializers.IntegerField(allow_null=False)
-    object = serializers.IntegerField(allow_null=False)
+    shared_object = serializers.IntegerField(allow_null=False)

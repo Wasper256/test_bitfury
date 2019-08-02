@@ -10,5 +10,5 @@ class Building(models.Model):
 
 
 class BuildingOwners(OwnershipAbstract):
-    object = models.ForeignKey(Building, on_delete=models.CASCADE,
-                               related_name='owners')
+    shared_object = models.ForeignKey(Building, on_delete=models.CASCADE,
+                                      related_name='owners')

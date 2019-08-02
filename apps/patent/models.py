@@ -9,5 +9,5 @@ class Patent(models.Model):
 
 
 class PatentOwners(OwnershipAbstract):
-    object = models.ForeignKey(Patent, on_delete=models.CASCADE,
-                               related_name='owners')
+    shared_object = models.ForeignKey(Patent, on_delete=models.CASCADE,
+                                      related_name='owners')

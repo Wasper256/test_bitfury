@@ -29,14 +29,14 @@ class BuildingRetrieveSerializer(serializers.ModelSerializer):
     def get_shareholders(self, obj):
         return BuildingShareholdersRetrieveSerializer(
             obj.owners.model.objects.filter(
-                object=self.instance).select_related('shareholder'),
+                shared_object=self.instance).select_related('shareholder'),
             many=True, context=self.context).data
 
 
 class CreateUpdateShareSerializer(serializers.ModelSerializer):
     class Meta:
         model = BuildingOwners
-        fields = ('shareholder', 'share', 'object')
+        fields = ('shareholder', 'share', 'shared_object')
 
     def validate_share(self, attrs):
         attrs = super().validate(attrs)

@@ -3,8 +3,8 @@ from rest_framework import viewsets
 from rest_framework.decorators import action
 from rest_framework.response import Response
 
-from apps.shared.utils import custom_retrieve
 from apps.shared.serializers import DeleteShareSerializer
+from apps.shared.utils import custom_retrieve
 from .models import Factory, FactoryOwners
 from .serializers import (
     FactoryRetrieveSerializer, FactoryBaseSerializer,
@@ -42,9 +42,9 @@ class FactoryViewSet(viewsets.ModelViewSet):
         # solution to make update and create in single action endpoint
         elif 'non_field_errors' in serializer.errors:
             if serializer.errors.get('non_field_errors')[0] == (
-                    'The fields shareholder, object must make a unique set.'):
+                    'The fields shareholder, shared_object must make a unique set.'):
                 FactoryOwners.objects.filter(
-                    object=serializer.initial_data.get('object'),
+                    shared_object=serializer.initial_data.get('shared_object'),
                     shareholder=serializer.initial_data.get('shareholder'))\
                     .update(share=serializer.initial_data.get('share'))
         else:
@@ -61,7 +61,7 @@ class FactoryViewSet(viewsets.ModelViewSet):
         serializer = DeleteShareSerializer(data=request.data)
         serializer.is_valid(raise_exception=True)
         deleted = FactoryOwners.objects.filter(
-            object=serializer.initial_data.get('object'),
+            shared_object=serializer.initial_data.get('shared_object'),
             shareholder=serializer.initial_data.get('shareholder')).delete()
         if deleted[0]:
             return Response({"success": "Successfully deleted"},

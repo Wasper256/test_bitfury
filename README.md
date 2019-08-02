@@ -30,7 +30,8 @@ DATABASE_URL=postgres://postgres:@localhost/db
 ```
 
 ## Additional notes
-There are two ways to do shareholders logic
+
+#####There are two ways to do shareholders logic
 
 1) Abstract model for general share and each type of shareholder object has its
  own model with changed "object" field. (This is the way i've done this task)  
@@ -47,3 +48,8 @@ share together
   
 cons: not so good queries, harder to work with single type of share, more
  complicated code
+---
+##### In task said that Patent and Product should have identification number
+I doesn't add extra field with id, because I think that database pk counts as
+as such identification number. If you think that it is not - just tell me and I
+will add some uuid field to mentioned models.

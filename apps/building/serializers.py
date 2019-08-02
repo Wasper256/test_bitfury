@@ -1,22 +1,18 @@
 from rest_framework import serializers
 
+from apps.shared.serializers import BaseShareholdersRetrieveSerializer
 from apps.shared.utils import share_custom_validator
 from .models import Building, BuildingOwners
 
 
-class BuildingShareholdersRetrieveSerializer(serializers.ModelSerializer):
-    username = serializers.CharField(read_only=True,
-                                     source="shareholder.username")
-    first_name = serializers.CharField(read_only=True,
-                                       source="shareholder.first_name")
-
+class BuildingShareholdersRetrieveSerializer(
+        BaseShareholdersRetrieveSerializer):
     class Meta:
         model = BuildingOwners
         fields = ('shareholder', 'username', 'first_name', 'share')
 
 
 class BuildingBaseSerializer(serializers.ModelSerializer):
-
     class Meta:
         model = Building
         fields = ('id', 'name', 'address', 'area',)
@@ -28,7 +24,7 @@ class BuildingRetrieveSerializer(serializers.ModelSerializer):
     class Meta:
         model = Building
         fields = ('id', 'name', 'address', 'area', 'shareholders')
-        read_only_fields = ('shareholders', )
+        read_only_fields = ('shareholders',)
 
     def get_shareholders(self, obj):
         return BuildingShareholdersRetrieveSerializer(

@@ -1,15 +1,12 @@
 from rest_framework import serializers
 
+from apps.shared.serializers import BaseShareholdersRetrieveSerializer
 from apps.shared.utils import share_custom_validator
 from .models import Patent, PatentOwners
 
 
-class PatentShareholdersRetrieveSerializer(serializers.ModelSerializer):
-    username = serializers.CharField(read_only=True,
-                                     source="shareholder.username")
-    first_name = serializers.CharField(read_only=True,
-                                       source="shareholder.first_name")
-
+class PatentShareholdersRetrieveSerializer(
+        BaseShareholdersRetrieveSerializer):
     class Meta:
         model = PatentOwners
         fields = ('shareholder', 'username', 'first_name', 'share')

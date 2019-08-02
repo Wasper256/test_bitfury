@@ -1,14 +1,6 @@
 from django.contrib import admin
+
 from .models import Product, ProductOwners
 
-
-class ProductAdmin(admin.ModelAdmin):
-    pass
-
-
-class ProductOwnersAdmin(admin.ModelAdmin):
-    pass
-
-
-admin.site.register(Product, ProductAdmin)
-admin.site.register(ProductOwners, ProductOwnersAdmin)
+admin.site.register(Product)
+admin.site.register(ProductOwners)

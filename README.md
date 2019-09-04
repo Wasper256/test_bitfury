@@ -51,11 +51,11 @@ cons: not so good queries, harder to work with single type of share, more
 
 
 #### In task said that Patent and Product should have identification number
-I doesn't add extra field with id, because I think that database pk counts as
+I don't add extra field with id, because I think that database pk counts 
 as such identification number. If you think that it is not - just tell me and I
 will add some uuid field to mentioned models.
 
 
 #### Views can be done more DRY
-I hasn't done more dry them to provide more code flexibility in further
+I haven't done more dry them to provide more code flexibility in further
  api views changes.
